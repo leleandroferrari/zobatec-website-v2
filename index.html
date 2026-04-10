@@ -116,12 +116,45 @@ html, body {
     .footer .brand img {
         height: 50px !important;
     }
-    /* Fix nav dropdown alignment on mobile */
+    /* ── Mobile nav fix ── */
+    .w-nav-menu {
+        background: #1d3960 !important;
+        padding: 16px 20px !important;
+    }
+    .nav-link-light.w-nav-link,
+    .nav-link.w-nav-link {
+        color: #fff !important;
+        padding: 10px 0 !important;
+        font-size: 16px !important;
+    }
     .w-dropdown {
         display: block !important;
+        position: static !important;
     }
     .w-dropdown-toggle {
-        padding-left: 0 !important;
+        padding: 10px 0 !important;
+        display: flex !important;
+        color: #fff !important;
+    }
+    .w-dropdown-list {
+        position: static !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        min-width: 0 !important;
+        padding: 0 0 0 16px !important;
+    }
+    .w-dropdown-link {
+        padding: 8px 0 !important;
+        color: rgba(255,255,255,0.8) !important;
+        font-size: 15px !important;
+    }
+    .mobile-hide {
+        display: inline-block !important;
+        margin-top: 12px !important;
+    }
+    .w-icon-nav-menu {
+        color: #fff !important;
     }
     /* Materials section: fix overflow + stack with images below */
     .project-section {
