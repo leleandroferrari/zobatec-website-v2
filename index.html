@@ -29,7 +29,7 @@
                 opacity: 1;
             }
         }
-    
+
 .w-webflow-badge { display: none !important; }
 .more-templates { display: none !important; }
 .access-paas { display: none !important; }
@@ -42,6 +42,138 @@
 .footer-divider { display: none !important; }
 
 .static-project-image-wrap { display: none !important; }
+
+/* Fix white bar above navigation */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+.page-lines { display: none !important; }
+.background-line {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+.navbar-light.w-nav {
+    background-color: #1d3960 !important;
+}
+.location-item-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.location-image-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.map-image {
+    margin: 0 auto !important;
+    display: block !important;
+}
+/* Force footer visible immediately (no scroll animation delay) */
+.footer, .footer-wrap, .footer-box {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* About section: align photo and Swiss flag element */
+.about-image-wrap {
+    display: flex !important;
+    align-items: stretch !important;
+}
+.about-image {
+    object-fit: cover !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.grid-about-content {
+    align-items: end !important;
+}
+
+/* Hide testimonial section on desktop, show on mobile */
+.testimonial-section { display: none !important; }
+.client-item-wrapper { display: none !important; }
+
+@media (max-width: 767px) {
+    .testimonial-section { display: block !important; }
+    .testimonial-image-wrap { display: none !important; }
+    .grid-testimonial-item { display: block !important; }
+    .testimonial-content {
+        background: #fff !important;
+        border-radius: 12px !important;
+        padding: 30px 30px 50px !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-light .brand img {
+        height: 40px !important;
+    }
+    .footer .brand img {
+        height: 50px !important;
+    }
+    /* Fix nav dropdown alignment on mobile */
+    .w-dropdown {
+        display: block !important;
+    }
+    .w-dropdown-toggle {
+        padding-left: 0 !important;
+    }
+    /* Materials section: fix overflow + stack with images below */
+    .project-section {
+        overflow: hidden !important;
+    }
+    .project-section-content {
+        display: block !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+    .project-item {
+        display: flex !important;
+        flex-direction: column !important;
+        max-width: 100% !important;
+    }
+    .project-title-wrap {
+        position: relative !important;
+        max-width: 100% !important;
+    }
+    .project-image-wrap {
+        position: relative !important;
+        opacity: 1 !important;
+        display: block !important;
+        width: 60% !important;
+        height: 140px !important;
+        margin-top: 8px !important;
+        margin-bottom: 20px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        float: none !important;
+        left: 0 !important;
+        right: auto !important;
+    }
+    .project-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    .project-decoration {
+        display: none !important;
+    }
+    .arrow-icon {
+        display: none !important;
+    }
+    .project-item-empty {
+        display: none !important;
+    }
+    .w-dyn-items {
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+}
 </style>
     <script type="text/javascript">
         ! function(o, c) {
@@ -88,7 +220,7 @@
         </div>
         <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-light w-nav">
             <div class="container-full w-container">
-                <div class="w-layout-grid grid-nav"><a href="/" id="w-node-dfa2e72a-ed5d-887d-c48a-f3aba13c7f96-a13c7f93" aria-current="page" class="brand w-nav-brand w--current"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:90px; width:auto; display:block; filter: brightness(0) invert(1);"/></a>
+                <div class="w-layout-grid grid-nav"><a href="/" id="w-node-dfa2e72a-ed5d-887d-c48a-f3aba13c7f96-a13c7f93" aria-current="page" class="brand w-nav-brand w--current"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:60px; width:auto; display:block; filter: brightness(0) invert(1);"/></a>
                     <div
                         id="w-node-dfa2e72a-ed5d-887d-c48a-f3aba13c7f98-a13c7f93" class="nav-menu-wrap">
                         <nav role="navigation" class="nav-menu w-nav-menu">
@@ -120,9 +252,14 @@
     if(refColor) toggle.style.color = refColor;
     var arrow = toggle.querySelector('span:last-child');
     if(arrow && refColor) arrow.style.color = refColor;
-    toggle.addEventListener('mouseenter',function(){list.style.display='block';});
-    dd.addEventListener('mouseleave',function(){list.style.display='none';});
-    toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    if('ontouchstart' in window || navigator.maxTouchPoints > 0){
+      toggle.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();list.style.display=list.style.display==='block'?'none':'block';});
+      document.addEventListener('click',function(e){if(!dd.contains(e.target))list.style.display='none';});
+    } else {
+      toggle.addEventListener('mouseenter',function(){list.style.display='block';});
+      dd.addEventListener('mouseleave',function(){list.style.display='none';});
+      toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    }
   });
 })();
 </script>
@@ -176,24 +313,23 @@
     <section class="about-section section-spacing-top">
         <div class="w-layout-blockcontainer container-full w-container">
             <div data-w-id="57d76187-7b18-ea04-117c-eacedbd59057" style="opacity:0" class="w-layout-grid grid-about">
-                <div class="about-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3ee60bba8cec24dc6f45_about-image.jpg" loading="lazy"
-                        alt="About Image" class="about-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="eager" alt="Vector" class="about-decoration" /></div>
+                <div class="about-image-wrap"><img src="images/zoran-barac.png" loading="lazy"
+                        alt="Zoran Barac" class="about-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="eager" alt="Vector" class="about-decoration" /></div>
                 <div class="about-content-wrap">
-                    <h2 class="about-title">Ihre Experten für mechanische Fertigung im Zürcher Oberland</h2>
+                    <h2 class="about-title">Ihr Experte für mechanische Fertigung im Zürcher Oberland</h2>
                     <div class="w-layout-grid grid-about-content">
                         <div>
                             <div class="about-content">
-                                <p class="about-description">Our mission is to drive innovation and excellence in everything we do. With a commitment to quality and sustainability, we invest in the latest technologies and sustainable practices to ensure that we not only meet but
-                                    exceed the expectations of our customers while protecting the environment.</p>
-                                <p class="about-description">We are more than just a manufacturing company; we are a team of dedicated engineers, designers, and craftsmen who believe in creating value for our customers.</p>
+                                <p class="about-description">Wir stehen für Präzision, Zuverlässigkeit und höchste Qualität in der mechanischen Fertigung. Mit modernsten CNC-Anlagen und über 20 Jahren Erfahrung fertigen wir Prototypen, Kleinserien und Grossserien nach Ihren exakten Vorgaben.</p>
+                                <p class="about-description">Wir sind mehr als ein Fertigungsbetrieb – wir sind ein Team aus erfahrenen Fachleuten, die mit Leidenschaft und Know-how individuelle Lösungen für unsere Kunden entwickeln.</p>
                             </div><a href="/about.html" class="button-primary w-button">Mehr über uns</a>
                             <div class="about-phone-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c41d9fe7375c89213e855_phone-dark.svg" loading="eager" alt="Phone Dark" />
                                 <div>Rufen Sie uns an:</div><a href="tel:+41795883377" class="about-contact-link">+41 79 588 33 77</a></div>
                         </div>
-                        <div id="w-node-_59f2978f-d5c1-171a-72cd-e8e1092d0a41-0bd4720e" class="about-year">
-                            <div>Über</div>
-                            <h2 class="about-year-title">20</h2>
-<div>Jahre</div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="lazy" alt="Vector" class="about-decoration-one" /></div>
+                        <div id="w-node-_59f2978f-d5c1-171a-72cd-e8e1092d0a41-0bd4720e" class="about-year" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px;">
+                            <div style="font-size:64px; line-height:1;">&#127464;&#127469;</div>
+                            <h2 class="about-year-title" style="font-size:24px; margin:0;">Schweizer</h2>
+<div style="font-size:18px;">Qualität</div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="lazy" alt="Vector" class="about-decoration-one" /></div>
                     </div>
                 </div>
             </div>
@@ -267,7 +403,7 @@
     <section class="location-section">
         <div data-w-id="68dbbe75-3c09-0de2-2acb-62c8ada6a03c" style="opacity:0" class="w-layout-grid grid-location">
             <div class="location-item-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c2ccbf49613f75af26600_vector-01.svg" loading="eager" alt="Vector" class="location-decoration" />
-                <div class="location-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c6052289f14e9285ef98b_map-image.svg" loading="eager" alt="Map Image" class="map-image" />
+                <div class="location-image-wrap"><img src="/images/karte-schweiz.png" loading="eager" alt="Map Image" class="map-image" />
                     <div data-w-id="73a7fadb-ae36-45a4-fa6d-1ad663885bd9" class="map-title one">
                         <div style="opacity:0" class="map-titles">Prototypen</div>
                         <div class="dot-icon-wrap one">
@@ -368,49 +504,45 @@
                     <div role="list" class="w-dyn-items">
                         <div role="listitem" class="w-dyn-item">
                             <div class="project-item">
-                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="/project/revolutionizing-renewable-energy" class="project-title-wrap w-inline-block">
+                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="#" onclick="return false;" class="project-title-wrap w-inline-block">
                                     <div>
                                         <h3 class="project-title">Aluminium & Stahl</h3>
                                         <div class="text-small">Leicht & Zuverlässig</div>
                                     </div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/6651973ecff7ef5355a05d67_arrow-icon.svg" loading="lazy" alt="Arrow Icon" class="arrow-icon" /></a>
-                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093"
-                                    class="project-image-wrap"><img src="images/alu_stahl.jpg" style="object-fit:cover;" loading="eager" alt=""
+                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093" class="project-image-wrap"><img src="images/alu_stahl.jpg" style="object-fit:cover;" loading="eager" alt="Aluminium & Stahl"
                                         class="project-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="lazy" alt="Vector" class="project-decoration" /></div>
                             </div>
                         </div>
                         <div role="listitem" class="w-dyn-item">
                             <div class="project-item">
-                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="/project/aerospace-structural-solutions" class="project-title-wrap w-inline-block">
+                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="#" onclick="return false;" class="project-title-wrap w-inline-block">
                                     <div>
                                         <h3 class="project-title">Edelstahl & Titan</h3>
                                         <div class="text-small">Für höchste Ansprüche</div>
                                     </div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/6651973ecff7ef5355a05d67_arrow-icon.svg" loading="lazy" alt="Arrow Icon" class="arrow-icon" /></a>
-                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093"
-                                    class="project-image-wrap"><img src="images/edelstahl_titan.jpg" style="object-fit:cover;" loading="eager" alt=""
+                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093" class="project-image-wrap"><img src="images/edelstahl_titan.jpg" style="object-fit:cover;" loading="eager" alt="Edelstahl & Titan"
                                         class="project-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="lazy" alt="Vector" class="project-decoration" /></div>
                             </div>
                         </div>
                         <div role="listitem" class="w-dyn-item">
                             <div class="project-item">
-                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="/project/industrial-equipment-optimization" class="project-title-wrap w-inline-block">
+                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="#" onclick="return false;" class="project-title-wrap w-inline-block">
                                     <div>
                                         <h3 class="project-title">Spezialkunststoffe</h3>
                                         <div class="text-small">Vielseitig einsetzbar</div>
                                     </div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/6651973ecff7ef5355a05d67_arrow-icon.svg" loading="lazy" alt="Arrow Icon" class="arrow-icon" /></a>
-                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093"
-                                    class="project-image-wrap"><img src="images/spezialkunststoffe.jpg" style="object-fit:cover;" loading="eager" alt=""
+                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093" class="project-image-wrap"><img src="images/spezialkunststoffe.jpg" style="object-fit:cover;" loading="eager" alt="Spezialkunststoffe"
                                         class="project-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="lazy" alt="Vector" class="project-decoration" /></div>
                             </div>
                         </div>
                         <div role="listitem" class="w-dyn-item">
                             <div class="project-item">
-                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="/project/renewable-revolution" class="project-title-wrap w-inline-block">
+                                <a data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e08e" href="#" onclick="return false;" class="project-title-wrap w-inline-block">
                                     <div>
                                         <h3 class="project-title">Hartbearbeitung & Superduplex</h3>
                                         <div class="text-small">Schwer zerspanbar</div>
                                     </div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/6651973ecff7ef5355a05d67_arrow-icon.svg" loading="lazy" alt="Arrow Icon" class="arrow-icon" /></a>
-                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093"
-                                    class="project-image-wrap"><img src="images/hartbearbeitung.jpg" style="object-fit:cover;" loading="eager" alt=""
+                                <div data-w-id="d7d99cf5-3856-e2c2-5882-2fe18136e093" class="project-image-wrap"><img src="images/hartbearbeitung.jpg" style="object-fit:cover;" loading="eager" alt="Hartbearbeitung & Superduplex"
                                         class="project-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="lazy" alt="Vector" class="project-decoration" /></div>
                             </div>
                         </div>
@@ -422,14 +554,14 @@
     <section class="testimonial-section">
         <div class="w-layout-blockcontainer container-full w-container">
             <div data-w-id="d4bf2931-d444-19de-89bc-1fc388f7311e" style="opacity:0" class="w-layout-grid grid-testimonial">
-                <div data-delay="4000" data-animation="cross" class="testimonial-slider w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500"
+                <div data-delay="5000" data-animation="cross" class="testimonial-slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500"
                     data-infinite="true">
                     <div class="testimonial-mask w-slider-mask">
                         <div class="testimonial-slide w-slide">
                             <div class="w-layout-grid grid-testimonial-item">
                                 <div class="testimonial-content"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c736128ac28fd317aece4_rating-image.svg" loading="eager" alt="Rating Image" class="star-image" />
                                     <p class="testimonial-title">Wir sind extrem zufrieden mit der Flexibilität und der schnellen Lieferung. Zobatec hat unsere Erwartungen bei komplexen Teilen voll übertroffen.</p>
-                                    <h4 class="heading-h6">Samuel Bishop</h4>
+                                    <h4 class="heading-h6">Zoran Barac</h4>
                                 </div>
                                 <div id="w-node-_68ba3338-58ff-463a-b48c-8ad6b532d1c8-0bd4720e" class="testimonial-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/665708730ef258e98cbcf9e6_testimonial-image-01.jpg" loading="eager"
                                         alt="Testimonial Image" class="testimonial-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c75c694cf97bfdd8582d2_vector-05.svg" loading="eager" alt="Vector" class="testimonial-decoration"
@@ -440,7 +572,7 @@
                             <div class="w-layout-grid grid-testimonial-item">
                                 <div class="testimonial-content"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c736128ac28fd317aece4_rating-image.svg" loading="eager" alt="Rating Image" class="star-image" />
                                     <p class="testimonial-title">Die Qualität der CNC-Frästeile ist hervorragend. Selbst bei komplexen Werkstoffen liefert Zobatec absolut fehlerfreie Resultate.</p>
-                                    <h4 class="heading-h6">Jacqueline Miller</h4>
+                                    <h4 class="heading-h6">Zoran Barac</h4>
                                 </div>
                                 <div id="w-node-_2ca690b3-98ee-dae9-47ee-df17ace25cea-0bd4720e" class="testimonial-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/66570a4f8592dacc2807a27a_testimonial-image-03.jpg" loading="eager"
                                         alt="Testimonial Image" class="testimonial-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c75c694cf97bfdd8582d2_vector-05.svg" loading="eager" alt="Vector" class="testimonial-decoration"
@@ -451,7 +583,7 @@
                             <div class="w-layout-grid grid-testimonial-item">
                                 <div class="testimonial-content"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c736128ac28fd317aece4_rating-image.svg" loading="eager" alt="Rating Image" class="star-image" />
                                     <p class="testimonial-title">Unsere erste Wahl für Grossbauteile und komplexe Baugruppenmontage. Persönlicher Kontakt und alles aus einer Hand – das schätzen wir sehr.</p>
-                                    <h4 class="heading-h6">Emma Watson</h4>
+                                    <h4 class="heading-h6">Zoran Barac</h4>
                                 </div>
                                 <div id="w-node-bac1e710-b7bf-d1ff-9794-7850edea7d63-0bd4720e" class="testimonial-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/6657087309330643e1fb1411_testimonial-image-02.jpg" loading="eager"
                                         alt="Testimonial Image" class="testimonial-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c75c694cf97bfdd8582d2_vector-05.svg" loading="eager" alt="Vector" class="testimonial-decoration"
@@ -515,8 +647,7 @@
                 <div id="w-node-_9807520c-65b7-e828-71bd-909a6cfe1805-6cfe1801" class="footer-item">
                     <h5 class="footer-title">Seiten</h5>
                     <div class="w-layout-grid grid-footer-menu">
-                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a><a href="/projects" class="footer-link">Leistungen</a><a href="/#services"
-                                class="footer-link">Kompetenzen</a></div>
+                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a></div>
                         
                     </div>
                 </div>
@@ -531,9 +662,9 @@
                             <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22caec4326af174d6e67_location.svg" loading="eager" alt="Location Icon" class="footer-image" />
                                 <div class="text-white">Höslistrasse 19, 8608 Bubikon</div>
                             </div>
-                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
+                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="Phone Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
                             <div
-                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="phone Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
+                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
                     </div>
                     <div>
                         <h5 class="footer-social-title">Folgen Sie uns</h5>

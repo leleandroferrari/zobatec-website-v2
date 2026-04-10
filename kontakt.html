@@ -2,9 +2,16 @@
 <style>
 .w-webflow-badge, .more-templates, .access-paas { display: none !important; }
 .subscribe-title, .footer-social-title, .footer-social-inline-wrap, .footer-copyright, .footer-divider { display: none !important; }
+.footer, .footer-wrap, .footer-box, .footer-item, .footer-title, .footer-link, .footer-detail, .footer-detail-wrap, .text-white, .footer-link-item, .hero-items { opacity: 1 !important; transform: none !important; }
+@media (max-width: 767px) {
+    .navbar .brand img { height: 40px !important; }
+    .footer .brand img { height: 50px !important; }
+    div[style*="grid-template-columns: 1fr 1.5fr"] { grid-template-columns: 1fr !important; gap: 30px !important; }
+    div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+}
 </style>
 
-</head><body><div class="background-line"><div class="page-lines"><div class="page-lines-outside"><div class="page-lines-inside"></div></div></div><div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav"><div class="container-full w-container"><div class="w-layout-grid grid-nav"><a href="/" class="brand w-nav-brand"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:52px; width:auto; display:block;"/></a><div id="w-node-_3cb34b39-3c96-a74f-9ceb-8aefeff185ca-18a8ef3c" class="nav-menu-wrap"><nav role="navigation" class="nav-menu-wrapper w-nav-menu">
+</head><body><div class="background-line"><div class="page-lines"><div class="page-lines-outside"><div class="page-lines-inside"></div></div></div><div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav"><div class="container-full w-container"><div class="w-layout-grid grid-nav"><a href="/" class="brand w-nav-brand"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:60px; width:auto; display:block;"/></a><div id="w-node-_3cb34b39-3c96-a74f-9ceb-8aefeff185ca-18a8ef3c" class="nav-menu-wrap"><nav role="navigation" class="nav-menu-wrapper w-nav-menu">
 <a href="/" class="nav-link w-nav-link">Startseite</a>
 <a href="/about.html" class="nav-link w-nav-link">Über uns</a>
 <div data-hover="true" data-delay="0" class="w-dropdown" style="position:relative; display:inline-block;">
@@ -35,9 +42,14 @@
     // Keep arrow same color too
     var arrow = toggle.querySelector('span:last-child');
     if(arrow && refColor) arrow.style.color = refColor;
-    toggle.addEventListener('mouseenter',function(){list.style.display='block';});
-    dd.addEventListener('mouseleave',function(){list.style.display='none';});
-    toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    if('ontouchstart' in window || navigator.maxTouchPoints > 0){
+      toggle.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();list.style.display=list.style.display==='block'?'none':'block';});
+      document.addEventListener('click',function(e){if(!dd.contains(e.target))list.style.display='none';});
+    } else {
+      toggle.addEventListener('mouseenter',function(){list.style.display='block';});
+      dd.addEventListener('mouseleave',function(){list.style.display='none';});
+      toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    }
   });
 })();
 </script>
@@ -281,8 +293,7 @@
                 <div id="w-node-_9807520c-65b7-e828-71bd-909a6cfe1805-6cfe1801" class="footer-item">
                     <h5 class="footer-title">Seiten</h5>
                     <div class="w-layout-grid grid-footer-menu">
-                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a><a href="/projects" class="footer-link">Leistungen</a><a href="/#services"
-                                class="footer-link">Kompetenzen</a></div>
+                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a></div>
                         
                     </div>
                 </div>
@@ -297,9 +308,9 @@
                             <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22caec4326af174d6e67_location.svg" loading="eager" alt="Location Icon" class="footer-image" />
                                 <div class="text-white">Höslistrasse 19, 8608 Bubikon</div>
                             </div>
-                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
+                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="Phone Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
                             <div
-                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="phone Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
+                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
                     </div>
                     <div>
                         <h5 class="footer-social-title">Folgen Sie uns</h5>

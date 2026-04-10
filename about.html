@@ -2,9 +2,18 @@
 <style>
 .w-webflow-badge, .more-templates, .access-paas { display: none !important; }
 .subscribe-title, .footer-social-title, .footer-social-inline-wrap, .footer-copyright, .footer-divider { display: none !important; }
+.footer, .footer-wrap, .footer-box, .footer-item, .footer-title, .footer-link, .footer-detail, .footer-detail-wrap, .footer-image, .text-white, .footer-link-item, .hero-items, .brand, .footer-decoration, .decoration-one { opacity: 1 !important; transform: none !important; }
+@media (max-width: 767px) {
+    .navbar .brand img { height: 40px !important; }
+    .footer .brand img { height: 50px !important; }
+    .w-dropdown { display: block !important; position: relative !important; }
+    .w-dropdown-toggle { display: block !important; text-align: left !important; padding: 10px 20px !important; }
+    .w-dropdown-list { position: static !important; box-shadow: none !important; border-radius: 0 !important; background: transparent !important; padding: 0 0 0 15px !important; }
+    .w-dropdown-list a { color: inherit !important; padding: 8px 20px !important; }
+}
 </style>
 
-</head><body><div class="background-line"><div class="page-lines"><div class="page-lines-outside"><div class="page-lines-inside"></div></div></div><div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav"><div class="container-full w-container"><div class="w-layout-grid grid-nav"><a href="/" class="brand w-nav-brand"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:52px; width:auto; display:block;"/></a><div id="w-node-_3cb34b39-3c96-a74f-9ceb-8aefeff185ca-18a8ef3c" class="nav-menu-wrap"><nav role="navigation" class="nav-menu-wrapper w-nav-menu">
+</head><body><div class="background-line"><div class="page-lines"><div class="page-lines-outside"><div class="page-lines-inside"></div></div></div><div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav"><div class="container-full w-container"><div class="w-layout-grid grid-nav"><a href="/" class="brand w-nav-brand"><img src="/images/zobatec-logo.png" alt="Zobatec GmbH" style="height:60px; width:auto; display:block;"/></a><div id="w-node-_3cb34b39-3c96-a74f-9ceb-8aefeff185ca-18a8ef3c" class="nav-menu-wrap"><nav role="navigation" class="nav-menu-wrapper w-nav-menu">
 <a href="/" class="nav-link w-nav-link">Startseite</a>
 <a href="/about.html" class="nav-link w-nav-link">Über uns</a>
 <div data-hover="true" data-delay="0" class="w-dropdown" style="position:relative; display:inline-block;">
@@ -21,7 +30,7 @@
 </div>
 <script>
 (function(){
-  // Match dropdown toggle color to sibling nav links automatically
+  var isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   var navLinks = document.querySelectorAll('.nav-link-light, .nav-link');
   var refColor = '';
   if(navLinks.length > 0){
@@ -32,19 +41,29 @@
     var list=dd.querySelector('.w-dropdown-list');
     if(!toggle||!list)return;
     if(refColor) toggle.style.color = refColor;
-    // Keep arrow same color too
     var arrow = toggle.querySelector('span:last-child');
     if(arrow && refColor) arrow.style.color = refColor;
-    toggle.addEventListener('mouseenter',function(){list.style.display='block';});
-    dd.addEventListener('mouseleave',function(){list.style.display='none';});
-    toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    if(isMobile){
+      toggle.addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        list.style.display=list.style.display==='block'?'none':'block';
+      });
+      document.addEventListener('click',function(e){
+        if(!dd.contains(e.target)) list.style.display='none';
+      });
+    } else {
+      toggle.addEventListener('mouseenter',function(){list.style.display='block';});
+      dd.addEventListener('mouseleave',function(){list.style.display='none';});
+      toggle.addEventListener('click',function(){list.style.display=list.style.display==='block'?'none':'block';});
+    }
   });
 })();
 </script>
-</nav><div class="button-left"><div class="menu-buttons w-nav-button"><div class="w-icon-nav-menu"></div></div></div></div></div></div></div><section class="about-hero-section"><div class="w-layout-blockcontainer container-full w-container"><div class="w-layout-grid grid-about-hero"><div id="w-node-_435c44ca-5090-b7b2-2429-edd4620bddde-715128a0" data-w-id="435c44ca-5090-b7b2-2429-edd4620bddde" style="opacity:0"><h1 class="about-hero-title">Wir sind Ihre Experten für mechanische Fertigung</h1></div><div class="about-hero-image-wrap"><img src="images/zoran_hero.png" loading="eager"   alt="About Image" class="about-hero-image"/><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="lazy" alt="Vector" class="about-hero-decoration"/><div class="about-counter"><div>Erfahrung</div><h2 class="about-counter-title">20+ Jahre</h2></div></div></div></div><div class="about-hero-content-wrap"><div data-w-id="901c9dba-72ea-9381-8dc8-547268ae4dca" style="opacity:0" data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="about-tabs w-tabs"><div class="about-tabs-menu w-tab-menu"><a data-w-tab="Tab 1" class="about-tab-link w-inline-block w-tab-link w--current"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8ca91ece45d95a86fad_tab-icon-01.svg" alt="Tab Icon" class="about-tab-icon"/><h3 class="about-tab-title">Qualität & Erfahrung</h3></a><a data-w-tab="Tab 2" class="about-tab-link w-inline-block w-tab-link"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8cd884df58ea1cbc77d_tab-icon-02.svg" alt="Tab Icon" class="about-tab-icon"/><h4 class="about-tab-title">Unser Netzwerk</h4></a><a data-w-tab="Tab 3" class="about-tab-link w-inline-block w-tab-link"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8caada5d3e6182c0024_tab-icon-03.svg" alt="Tab Icon" class="about-tab-icon"/><h5 class="about-tab-title">Unsere Stärken</h5></a></div><div class="about-tabs-content w-tab-content"><div data-w-tab="Tab 1" class="about-tab-pane w-tab-pane w--tab-active"><p class="about-tab-content">Mit über 20 Jahren Erfahrung in der mechanischen Fertigung garantieren wir höchste Qualität. Besondere Erfahrung haben wir im Drehen von Grossteilen sowie der Baugruppenmontage von Grossanlagen (z. B. Kernkraftwerke, Wasserkraftwerke und Stahlwerke). Die letzten 8 Jahre in der Produktionsleitung bzw. Stv. Geschäftsführung prägen unseren Anspruch, bei jedem Einzelteil Perfektion zu liefern.</p></div><div data-w-tab="Tab 2" class="about-tab-pane w-tab-pane"><p class="about-tab-content">Durch unser tief verwurzeltes Partnernetzwerk in verschiedensten Nischen bieten wir Ihnen ein Komplettpaket: Design, Fertigung, Oberflächenbehandlung (Feuerverzinken, Härten), Schweissen, 3D-Druck, Erodieren bis hin zur Montage und Laserbeschriftung. Alles wird zentral koordiniert, in kürzester Zeit und aus einer Hand.</p></div><div data-w-tab="Tab 3" class="about-tab-pane w-tab-pane"><p class="about-tab-content">Wo andere aufgeben, fangen wir erst an. Komplex? Kein Problem. Wir drehen weiter. Extreme Schnelligkeit, höchste Genauigkeit und absolute Flexibilität bei Änderungen – das sind unsere Markenzeichen. Sie haben immer Ihren direkten, persönlichen Ansprechpartner für jedes Projekt.</p></div></div></div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="eager" alt="Vector" class="about-tabs-decoration"/></div></section><section class="team-section section-spacing"><div class="w-layout-blockcontainer container-full w-container"><div class="section-title text-center"><h2 data-w-id="b99c4a3d-cb1a-1fe6-197d-47d13cd3493f" style="opacity:0">Geschäftsführung</h2></div><div data-w-id="a6751caa-16ba-bdce-1cfc-e25094b44e78" style="opacity:0" class="w-dyn-list"><div role="list" class="grid-team w-dyn-items" style="display:flex; justify-content:center;">
+</nav><div class="button-left"><div class="menu-buttons w-nav-button"><div class="w-icon-nav-menu"></div></div></div></div></div></div></div><section class="about-hero-section"><div class="w-layout-blockcontainer container-full w-container"><div class="w-layout-grid grid-about-hero"><div id="w-node-_435c44ca-5090-b7b2-2429-edd4620bddde-715128a0" data-w-id="435c44ca-5090-b7b2-2429-edd4620bddde" style="opacity:0"><h1 class="about-hero-title">Ihr Experte für mechanische Fertigung</h1></div><div class="about-hero-image-wrap"><img src="images/zoran-barac.png" loading="eager" alt="Zoran Barac" class="about-hero-image"/><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="lazy" alt="Vector" class="about-hero-decoration"/><div class="about-counter" style="display:none;"><div>Erfahrung</div><h2 class="about-counter-title">20+ Jahre</h2></div></div></div></div><div class="about-hero-content-wrap"><div data-w-id="901c9dba-72ea-9381-8dc8-547268ae4dca" style="opacity:0" data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="about-tabs w-tabs"><div class="about-tabs-menu w-tab-menu"><a data-w-tab="Tab 1" class="about-tab-link w-inline-block w-tab-link w--current"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8ca91ece45d95a86fad_tab-icon-01.svg" alt="Tab Icon" class="about-tab-icon"/><h3 class="about-tab-title">Qualität & Erfahrung</h3></a><a data-w-tab="Tab 2" class="about-tab-link w-inline-block w-tab-link"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8cd884df58ea1cbc77d_tab-icon-02.svg" alt="Tab Icon" class="about-tab-icon"/><h4 class="about-tab-title">Unser Netzwerk</h4></a><a data-w-tab="Tab 3" class="about-tab-link w-inline-block w-tab-link"><img loading="lazy" src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664dc8caada5d3e6182c0024_tab-icon-03.svg" alt="Tab Icon" class="about-tab-icon"/><h5 class="about-tab-title">Unsere Stärken</h5></a></div><div class="about-tabs-content w-tab-content"><div data-w-tab="Tab 1" class="about-tab-pane w-tab-pane w--tab-active"><p class="about-tab-content">Mit über 20 Jahren Erfahrung in der mechanischen Fertigung garantieren wir höchste Qualität. Besondere Erfahrung haben wir im Drehen von Grossteilen sowie der Baugruppenmontage von Grossanlagen (z. B. Kernkraftwerke, Wasserkraftwerke und Stahlwerke). Die letzten 8 Jahre in der Produktionsleitung bzw. Stv. Geschäftsführung prägen unseren Anspruch, bei jedem Einzelteil Perfektion zu liefern.</p></div><div data-w-tab="Tab 2" class="about-tab-pane w-tab-pane"><p class="about-tab-content">Durch unser tief verwurzeltes Partnernetzwerk in verschiedensten Nischen bieten wir Ihnen ein Komplettpaket: Design, Fertigung, Oberflächenbehandlung (Feuerverzinken, Härten), Schweissen, 3D-Druck, Erodieren bis hin zur Montage und Laserbeschriftung. Alles wird zentral koordiniert, in kürzester Zeit und aus einer Hand.</p></div><div data-w-tab="Tab 3" class="about-tab-pane w-tab-pane"><p class="about-tab-content">Wo andere aufgeben, fangen wir erst an. Komplex? Kein Problem. Wir drehen weiter. Extreme Schnelligkeit, höchste Genauigkeit und absolute Flexibilität bei Änderungen – das sind unsere Markenzeichen. Sie haben immer Ihren direkten, persönlichen Ansprechpartner für jedes Projekt.</p></div></div></div><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c38e41b59cdda8284fbbc_vector-03.svg" loading="eager" alt="Vector" class="about-tabs-decoration"/></div></section><section class="team-section section-spacing"><div class="w-layout-blockcontainer container-full w-container"><div class="section-title text-center"><h2 data-w-id="b99c4a3d-cb1a-1fe6-197d-47d13cd3493f" style="opacity:0">Geschäftsführung</h2></div><div data-w-id="a6751caa-16ba-bdce-1cfc-e25094b44e78" style="opacity:0" class="w-dyn-list"><div role="list" class="grid-team w-dyn-items" style="display:flex; justify-content:center;">
 <div role="listitem" class="w-dyn-item" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: left;">
     <div class="team-item" style="padding: 40px; background-color: #f9f9f9; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); cursor: default;">
-        <h2 class="team-title" style="margin-bottom: 5px; color: #1b3d6c; font-size: 32px;">Zoran Zobatec</h2>
+        <h2 class="team-title" style="margin-bottom: 5px; color: #1b3d6c; font-size: 32px;">Zoran Barac</h2>
         <div style="font-weight: 600; font-size: 18px; color: #666; margin-bottom: 30px; letter-spacing: 1px; text-transform: uppercase;">Gründer & Geschäftsführer</div>
         
         <h4 style="margin-top: 20px; margin-bottom: 15px; border-bottom: 2px solid #1b3d6c; padding-bottom: 10px; display: inline-block;">Mein Werdegang</h4>
@@ -80,8 +99,7 @@
                 <div id="w-node-_9807520c-65b7-e828-71bd-909a6cfe1805-6cfe1801" class="footer-item">
                     <h5 class="footer-title">Seiten</h5>
                     <div class="w-layout-grid grid-footer-menu">
-                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a><a href="/projects" class="footer-link">Leistungen</a><a href="/#services"
-                                class="footer-link">Kompetenzen</a></div>
+                        <div class="footer-links"><a href="/" aria-current="page" class="footer-link w--current">Startseite</a><a href="/about.html" class="footer-link">Über uns</a><a href="/kontakt.html" class="footer-link">Kontakt</a></div>
                         
                     </div>
                 </div>
@@ -96,9 +114,9 @@
                             <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22caec4326af174d6e67_location.svg" loading="eager" alt="Location Icon" class="footer-image" />
                                 <div class="text-white">Höslistrasse 19, 8608 Bubikon</div>
                             </div>
-                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
+                            <div class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="Phone Icon" class="footer-image" /><a href="tel:+41795883377" class="footer-link-item">+41 79 588 33 77</a></div>
                             <div
-                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca01efdf01461cc23c_phone.svg" loading="eager" alt="phone Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
+                                class="footer-detail"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c22ca945e97d6dada895f_email.svg" loading="eager" alt="Email Icon" class="footer-image" /><a href="mailto:info@zobatec.ch" class="footer-link-item">info@zobatec.ch</a></div>
                     </div>
                     <div>
                         <h5 class="footer-social-title">Folgen Sie uns</h5>
