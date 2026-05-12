@@ -93,21 +93,9 @@ html, body {
     align-items: end !important;
 }
 
-/* Hide testimonial section on desktop, show on mobile */
+/* Hide testimonial section on all viewports */
 .testimonial-section { display: none !important; }
 .client-item-wrapper { display: none !important; }
-
-@media (max-width: 767px) {
-    .testimonial-section { display: block !important; }
-    .testimonial-image-wrap { display: none !important; }
-    .grid-testimonial-item { display: block !important; }
-    .testimonial-content {
-        background: #fff !important;
-        border-radius: 12px !important;
-        padding: 30px 30px 50px !important;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
-    }
-}
 
 @media (max-width: 767px) {
     .navbar-light .brand img {
@@ -241,6 +229,15 @@ html, body {
 .footer-divider { display: none !important; }
 
 .static-project-image-wrap { display: none !important; }
+
+.service-item { display: flex !important; flex-direction: column !important; height: 100% !important; }
+.service-title-wrap { min-height: 260px !important; }
+.service-image-wrap { margin-top: auto !important; }
+.service-slide, .w-slide { height: auto !important; }
+
+.grid-about { align-items: start !important; }
+.about-image-wrap { align-self: start !important; margin-top: 0 !important; padding-top: 0 !important; }
+.about-image { margin-top: 0 !important; }
 </style>
 </head>
 
@@ -346,7 +343,7 @@ html, body {
     <section class="about-section section-spacing-top">
         <div class="w-layout-blockcontainer container-full w-container">
             <div data-w-id="57d76187-7b18-ea04-117c-eacedbd59057" style="opacity:0" class="w-layout-grid grid-about">
-                <div class="about-image-wrap"><img src="images/zoran-barac.png" loading="lazy"
+                <div class="about-image-wrap" style="align-self:start;"><img src="images/zoran-barac.png" loading="lazy"
                         alt="Zoran Barac" class="about-image" /><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c3fda9917aea771725b0b_vector-04.svg" loading="eager" alt="Vector" class="about-decoration" /></div>
                 <div class="about-content-wrap">
                     <h2 class="about-title">Ihr Experte für mechanische Fertigung im Zürcher Oberland</h2>
@@ -404,7 +401,7 @@ html, body {
                         <a data-w-id="6b4e4005-0f61-84e9-e165-b329146e5117" href="engineering-design.html" class="service-item w-inline-block">
                             <div class="service-title-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c4df25d5c1ac83d1eacf2_service-icon-03.svg" loading="eager" alt="Service Icon" class="service-icon" />
                                 <h5 class="service-title">Engineering &amp; Design</h5>
-                                <p class="service-description">Umfassende Unterstützung bei Design und Entwicklung für massgeschneiderte Kundenlösungen.</p>
+                                <p class="service-description">Umfassende Unterstützung bei Design und Entwicklung individueller Lösungen.</p>
                             </div>
                             <div class="service-image-wrap"><img src="https://cdn.prod.website-files.com/664b106f1e305b850bd47220/664c4f5ea48076260cffff14_service-image-03.jpg" loading="eager" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                     alt="Service Image"
